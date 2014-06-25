@@ -1,0 +1,34 @@
+<div ng-include="'partials/navbar'"></div>
+
+<div class="well">
+  <h2> Probe </h2>
+
+  <div class="form-group">
+    host: <input class="form-control" ng-model="host">
+  </div>
+
+  <div class="form-group">
+    port: <input class="form-control" ng-model="ports">
+  </div>
+
+  <button class="btn btn-block btn-primary" ng-click="probe(host, ports)"> Probe </button>
+
+  <br/>
+  <div ng-show="scanning" class="alert alert-success alert-dismissable"> <strong> Heads up! </strong> The scan may take a few seconds... </div>
+
+  <div ng-show="error" class="alert alert-danger alert-dismissable"> <strong> Error </strong> {{error}} </div>
+
+  <div ng-show="scan">
+    <h2> Scan Results: {{scan.ip}} </h2>
+
+    <table class="table">
+      <tr>
+        <th> Port </th> <th> State </th> <th> Protocol </th> <th> Owner </th> <th> Service </th> <th> RPC </th> <th> Version </th>
+      </tr>
+      <tr ng-repeat="port in scan.ports">
+        <td> {{port.port}} </td> <td> {{port.state}} </td> <td> {{port.protocol}} </td> <td> {{port.owner}} </td> <td> {{port.service}} </td> <td> {{port.rpc }}</td> <td> {{port.version}} </td>
+      </tr>
+    </table>
+
+  </div>
+</div>
